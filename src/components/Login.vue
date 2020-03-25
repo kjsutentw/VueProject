@@ -1,5 +1,7 @@
 <template>
 
+  <div class="login">
+
   <el-form class="login-container" label-position="left"
            label-width="0px">
     <el-button style="border: none"  class="other_title" @click="goRoot">系统管理员或审批人员登陆</el-button>
@@ -21,6 +23,8 @@
     </el-form-item>
 
   </el-form>
+
+  </div>
 </template>
 
 
@@ -80,6 +84,16 @@
 </script>
 
 <style>
+
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url("../assets/image/login-background.jpg");
+    background-size: cover;
+  }
+
   .login-container {
     border-radius: 15px;
     background-clip: padding-box;
@@ -101,6 +115,8 @@
     text-align: left;
     color: #505458;
   }
+
+
 
 
 </style>

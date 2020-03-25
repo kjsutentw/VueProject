@@ -7,7 +7,7 @@
     v-model="addFromVisable"
   >
 
-    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
+    <el-form ref="form" label-width="80px" size="mini">
       <el-form-item >
         项目类别:<el-input  style="width: 15%" v-model="sizeForm.projectType"></el-input>
         填报部门:
@@ -35,22 +35,22 @@
 
       </el-form-item>
       <el-form-item>
-        劳务费:<el-input  style="width: 15%" v-model="sizeForm.labourServicesFee"></el-input>
-        专家咨询费:<el-input  style="width: 15%" v-model="sizeForm.expertConsultationFee"></el-input>
-        资料费:<el-input  style="width: 15%" v-model="sizeForm.dataFee"></el-input>
+        劳务费:<el-input type="number" style="width: 15%" v-model="sizeForm.labourServicesFee"></el-input>
+        专家咨询费:<el-input type="number" style="width: 15%" v-model="sizeForm.expertConsultationFee"></el-input>
+        资料费:<el-input type="number" style="width: 15%" v-model="sizeForm.dataFee"></el-input>
 
       </el-form-item>
 
       <el-form-item>
-        资源库、软件建设费:<el-input  style="width: 15%" v-model="sizeForm.resourceBaseFee"></el-input>
-        其他费用:<el-input  style="width: 15%" v-model="sizeForm.otherFee"></el-input>
-        经费合计:<el-input  style="width: 15%" v-model="sizeForm.sumFee" ></el-input>
+        资源库、软件建设费:<el-input type="number" style="width: 15%" v-model="sizeForm.resourceBaseFee"></el-input>
+        其他费用:<el-input  type="number" style="width: 15%" v-model="sizeForm.otherFee"></el-input>
+        经费合计:<el-input type="number" style="width: 15%" v-model="sizeForm.sumFee" ></el-input>
       </el-form-item>
 
 
       <el-form-item >
        <h   v-for="(val,index) in Fieldinput" :key="index">{{val.name}}
-       <el-input style="width: 15%" v-model="val.value" ></el-input>
+       <el-input type="number" style="width: 15%" v-model="val.value" ></el-input>
          <p v-if="(index+1)%3==0"></p>
        </h>
       </el-form-item>
@@ -140,16 +140,24 @@
                 type: 'success'
               });
               this.clearFrom();
+            }else {
+              this.$message({
+                message: successResponse.data.msg,
+                type: 'error'
+              });
             }
           })
           .catch(failResponse => {
-            console.log(data.msg);
+            this.$message({
+              message: '添加失败',
+              type: 'error'
+            });
           })
       },
       SubmitTest () {
         var ranid = parseInt(Math.random() * 1000000000 + 1);
         this.sizeForm = {
-          "projectType": "400",
+          "projectType": "专业考试",
           "department": "200",
           "projectLeader": "陆涛",
           "projectName": "test项目数据",

@@ -9,10 +9,35 @@
     data() {
       return {
         charts: '',
-        opinionData: ["100", "102", "106", "350", "1100","100", "102", "106", "350", "1100","100", "102"]
+        opinionData: [],
+        listData:[]
       }
     },
     methods: {
+      initData(){
+
+        this.$axios
+          .get('/budget/select/moneyMoth?'+'status=00255').then(datasuccessRsp => {
+          if (datasuccessRsp.data.code ==200) {
+            var result= datasuccessRsp.data.data;
+            this.listData=result;
+            console.log(result);
+            for(var i=0;i<this.listData.length;i++){
+              var a=this.listData[i].sum_fee;
+              this.opinionData.push(a);
+              console.log(this.listData[i].sum_fee);
+            }
+
+
+            this.drawLine('bar_main');
+
+
+          }
+        })
+          .catch(failResponse => {
+            console.log(failResponse);
+          })
+      },
       drawLine(id) {
         this.charts = echarts.init(document.getElementById(id))
         this.charts.setOption({
@@ -70,7 +95,7 @@
                 }
               },
             },
-            data: [32.6, 25.9, 39.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 58.8, 16.0, 32.3]
+            data: this.opinionData
           }]
 
         })
@@ -78,6 +103,7 @@
     },
     //调用
     mounted() {
+      this.initData();
       this.$nextTick(function() {
         this.drawLine('bar_main')
       })

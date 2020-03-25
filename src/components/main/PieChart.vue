@@ -1,49 +1,14 @@
 <template>
   <div class="user-room">
+
+
+    <PanelGroup></PanelGroup>
+
     <el-row >
-      <el-col :span="14"><div class="grid-content bg-purple"><Bar></Bar></div></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple-light"><mainTabs></mainTabs></div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple-light"><ThreeDateTime></ThreeDateTime></div></el-col>
+      <el-col :span="18"><div class="grid-content bg-purple"><Bar></Bar></div></el-col>
+      <el-col :span="6"><div class="grid-content bg-purple-light"><mainTabs></mainTabs></div></el-col>
     </el-row>
-    <el-row>
-      <el-col :span="5">
-        <div class="grid-content bg-purple">
-          <el-tabs v-model="activeName">
-            <el-tab-pane label="全年" name="first"><div id="scatterReport" style="width: 300px;height: 400px;"></div></el-tab-pane>
-            <el-tab-pane label="高校预算" name="second">配置管理</el-tab-pane>
-            <el-tab-pane label="其他预算" name="third">角色管理</el-tab-pane>
-          </el-tabs>
 
-        </div>
-      </el-col>
-
-      <el-col :span="4">
-        <div class="grid-content bg-purple-light">
-          <div style="width: 200px;height:460px ">
-            <mainNotice></mainNotice>
-          </div>
-        </div>
-      </el-col>
-
-
-      <el-col :span="6">
-        <div class="grid-content bg-purple-light">
-          <div style="width: 300px;height:460px ">
-            <mainCard01></mainCard01>
-            <mainCard02></mainCard02>
-          </div>
-        </div>
-      </el-col>
-
-      <el-col :span="9">
-        <div class="grid-content bg-purple-light">
-        <Curve></Curve>
-        </div>
-      </el-col>
-
-
-
-    </el-row>
 
 
   </div>
@@ -58,9 +23,10 @@
   import mainCard01 from './mainCard01'
   import mainCard02 from './mainCard02'
   import mainNotice from './mainNotice'
+  import PanelGroup from './PanelGroup'
   export default {
     name: 'PieChart',
-    components: {Curve,Bar,mainTabs,ThreeDateTime,mainCard01,mainCard02,mainNotice},
+    components: {PanelGroup, Curve,Bar,mainTabs,ThreeDateTime,mainCard01,mainCard02,mainNotice},
     comments:{
       Curve,
       Bar,
@@ -68,7 +34,8 @@
       ThreeDateTime,
       mainCard01,
       mainCard02,
-      mainNotice
+      mainNotice,
+      PanelGroup
     },
     data () {
       return {
@@ -82,7 +49,7 @@
             text: '数据来源',
             subtext:'每项数据',
             left: 'center',
-            top: 20,
+            top: 50,
             textStyle: {
               fontStyle:'italic'//标题字体
             }
@@ -121,7 +88,7 @@
             // y: 'bottom', // y方向位置,top/bottom
             left: 'center', // 距离左边的位置、距离 (值可以是'left', 'center', 'right'，或者具体的数值)
             // right: 10,
-            // top: 10,
+            top: 60,
             bottom: 30,
             itemGap: 10, // 间隔。横向布局时为水平间隔，纵向布局时为纵向间隔
             itemWidth: 50, //图形宽度

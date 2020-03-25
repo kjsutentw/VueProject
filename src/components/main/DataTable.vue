@@ -42,14 +42,14 @@
       style="width: 100%">
 
       <el-table-column
-        prop="createUser"
+        prop="userCreate"
         label="创建者"
         width="180">
       </el-table-column>
 
       <el-table-column
-        prop="projectLeader"
-        label="课题负责人"
+        prop="punid"
+        label="项目编号"
         width="180">
       </el-table-column>
       <el-table-column
@@ -57,34 +57,28 @@
         label="项目类别">
       </el-table-column>
       <el-table-column
-        prop="department"
-        label="填报部门">
-      </el-table-column>
-      <el-table-column
-        prop="projectName"
-        label="项目名称">
-      </el-table-column>
-      <el-table-column
-        prop="equipmentFee"
-        label="设备费">
-      </el-table-column>
-      <el-table-column
         prop="sumFee"
-        label="经费合计">
+        label="预算合计">
+      </el-table-column>
+      <el-table-column
+        prop="createTime"
+        label="创建时间">
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-link type="primary" v-if="scope.row.status=='00013'" @click="opinionClick(scope.row)">待审批</el-link>
           <el-link type="primary" v-if="scope.row.status=='00019'" @click="linkClick(scope.row.status)">已审批</el-link>
+          <el-link type="primary" v-if="scope.row.status=='00255'" @click="linkClick(scope.row.status)">执行中</el-link>
           <el-link type="primary" v-if="scope.row.status=='00963'">退回</el-link>
           <el-link type="primary" v-if="scope.row.status=='00655'" @click="linkClick(scope.row.status)" >已完成</el-link>
 
         </template>
       </el-table-column>
     </el-table>
-    <FormStep ref="step"></FormStep>
+    <FormStep  ref="step"></FormStep>
 
-    <FormShow ref="formShow"></FormShow>
+    <FormShow @queryinit="queryinit" ref="formShow"></FormShow>
+    <FormShowOffice @queryinit="queryinit" ref="formShowOffice"></FormShowOffice>
     <!-- 分页底部 -->
     <el-pagination
       @size-change="handleSizeChange"
@@ -109,12 +103,14 @@
   import AESsecret from '../..//js/secret.js'
   import FormStep from '../public/elBudgetFormStep'
   import FormShow from './approver/ShowForm'
+  import FormShowOffice from './approver/ShowOfficeForm'
     export default {
       name: "DataTable",
       components: {
         ViewPage,
         FormStep,
-        FormShow
+        FormShow,
+        FormShowOffice
       },
       data() {
         return {
@@ -126,14 +122,11 @@
           select_key:'',
           data_select: '',
           options: [{
-            value: 'projectId',
+            value: 'punid',
             label: '项目编号'
           }, {
             value: 'projectType',
             label: '项目类型'
-          }, {
-            value: 'projectLeader',
-            label: '负责老师'
           }],
           filterType: '',
           tableData: [],
@@ -178,29 +171,31 @@
       methods:{
 
         /**
-         * 点击待审批时调用组件方法，显示组件和传入数据
-         * @param row 一个表单对象(无扩展字段)
+         * 点击待审批时调用组件方法，显示组件和传入
+         * @
          */
         opinionClick(row){
-          this.$refs.formShow.Edit(row,this.userName);
+
+         this.queryProByid(row.punid,row.projectType);
+
+
+        },
+        queryinit(){
+          this.query(1,10);
         },
         handleSizeChange(val) {
           this.pagesize=val;
           this.query(this.currentPage,this.pagesize)
         },
         handleCurrentChange(val) {
-          console.log(`当前页: ${val}`);
           this.currentPage=val;
           this.query(this.currentPage,this.pagesize)
 
         },
         query(currentPage,pagesize){
 
-          var senddata={"currentPage":currentPage,"pagesize":pagesize};
           this.$axios
-            .post('/budget/select', {
-              senddata
-            }).then(datasuccessRsp => {
+            .get('/budget/selectAll/byStatus?'+'currentPage='+currentPage+'&'+'pageSize='+pagesize+'&status=00013').then(datasuccessRsp => {
             if (datasuccessRsp.data.code ==200) {
               var rsp=datasuccessRsp.data.data.data;
               console.log("" +
@@ -221,6 +216,31 @@
         },
         linkClick(status){
           this.$refs.step.linkClick(status);
+        },
+        queryProByid(id,projectType){
+          this.$axios
+            .get('/budget/selectData?'+'id='+id+'&'+'type='+projectType+'').then(datasuccessRsp => {
+            if (datasuccessRsp.data.code ==200) {
+              var rsp=datasuccessRsp.data.data.data;
+              console.log("" +
+                "返回的数据:"+rsp);
+              var b=AESsecret.decrypt(rsp);
+              console.log(b)
+              if(b!=""&&b!=null){
+                if(projectType=='专业建设预算'){
+                  this.$refs.formShow.Edit(b,this.userName,this.sizeForm);
+                }else  if(projectType=='办公费用'){
+                  this.$refs.formShowOffice.Edit(b,this.userName,this.sizeForm);
+                }
+              }else {
+                this.tableData=[]
+              }
+
+            }
+          })
+            .catch(failResponse => {
+              console.log(failResponse);
+            })
         }
 
 

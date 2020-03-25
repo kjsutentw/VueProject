@@ -1,4 +1,5 @@
 <template>
+  <div class="login">
   <el-form class="login-container" label-position="left"
            label-width="0px" >
     <h3 class="login_title">审批人员或系统管理员登陆</h3>
@@ -18,6 +19,8 @@
 
 
   </el-form>
+
+ </div>
 </template>
 
 <script>
@@ -85,6 +88,16 @@
 </script>
 
 <style scoped>
+
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url("../assets/image/login-background.jpg");
+    background-size: cover;
+  }
+
   .login-container {
     border-radius: 15px;
     background-clip: padding-box;
