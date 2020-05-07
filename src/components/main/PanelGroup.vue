@@ -3,7 +3,7 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
+          <i class="el-icon-user" style="width: 25px;height: 35px"></i>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
@@ -16,11 +16,11 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+          <i class="el-icon-s-data"></i>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            消息
+            风险值
           </div>
           <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
         </div>
@@ -29,11 +29,12 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+
+          <i class="el-icon-tickets"></i>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            金额
+            预算金额
           </div>
           <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
         </div>
@@ -42,11 +43,11 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+         <i class="el-icon-s-unfold"></i>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            订单
+            执行预算
           </div>
           <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
         </div>
@@ -57,7 +58,6 @@
 
 <script>
 import CountTo from 'vue-count-to'
-
 export default {
   components: {
     CountTo
@@ -79,7 +79,7 @@ export default {
   .card-panel {
     height: 108px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 30px;
     position: relative;
     overflow: hidden;
     color: #666;
@@ -90,6 +90,9 @@ export default {
     &:hover {
       .card-panel-icon-wrapper {
         color: #fff;
+        height: 35%;
+        width: 25%;
+        font-size: 40px;
       }
 
       .icon-people {
@@ -158,7 +161,7 @@ export default {
   }
 }
 
-@media (max-width:550px) {
+@media (max-width:420px) {
   .card-panel-description {
     display: none;
   }
@@ -169,11 +172,6 @@ export default {
     height: 100%;
     margin: 0 !important;
 
-    .svg-icon {
-      display: block;
-      margin: 14px auto !important;
-      float: none !important;
-    }
   }
 }
 </style>

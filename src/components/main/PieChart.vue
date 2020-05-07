@@ -1,14 +1,15 @@
 <template>
   <div class="user-room">
 
-
     <PanelGroup></PanelGroup>
 
-    <el-row >
-      <el-col :span="18"><div class="grid-content bg-purple"><Bar></Bar></div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple-light"><mainTabs></mainTabs></div></el-col>
-    </el-row>
+    <LineChart></LineChart>
 
+    <el-row >
+      <el-col :span="8"><div class="grid-content bg-purple"> <PieChart02></PieChart02></div></el-col>
+      <el-col :span="9"><div class="grid-content bg-purple-light"><BarChart02></BarChart02></div></el-col>
+      <el-col :span="7"><div class="grid-content bg-purple-light"><mainTabs></mainTabs></div></el-col>
+    </el-row>
 
 
   </div>
@@ -20,22 +21,24 @@
   import Bar from './Bar'
   import mainTabs from './mainTabs'
   import ThreeDateTime from '../public/ThreeDateTime'
-  import mainCard01 from './mainCard01'
-  import mainCard02 from './mainCard02'
   import mainNotice from './mainNotice'
   import PanelGroup from './PanelGroup'
+  import PieChart02 from  '../public/PieChart'
+  import BarChart02 from  '../public/BarChart'
+  import LineChart from '../public/LineChart'
   export default {
     name: 'PieChart',
-    components: {PanelGroup, Curve,Bar,mainTabs,ThreeDateTime,mainCard01,mainCard02,mainNotice},
+    components: {PanelGroup, Curve,Bar,mainTabs,ThreeDateTime,mainNotice,PieChart02,BarChart02,LineChart},
     comments:{
       Curve,
       Bar,
       mainTabs,
       ThreeDateTime,
-      mainCard01,
-      mainCard02,
       mainNotice,
-      PanelGroup
+      PanelGroup,
+      PieChart02,
+      BarChart02,
+      LineChart
     },
     data () {
       return {
@@ -152,33 +155,17 @@
 
 </script>
 
-<style scoped>
-  .el-row {
-    margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
-  }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #f9fafc;
-  }
-  .bg-purple {
-    background: #f9fafc;
-  }
-  .bg-purple-light {
-    background: #f9fafc;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
+<style lang="scss" scoped>
+  .dashboard-editor-container {
+    padding: 32px;
+    background-color: rgb(240, 242, 245);
+    position: relative;
+
+
   }
 
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
+
 
 </style>
+
+

@@ -1,5 +1,8 @@
 <template>
-  <el-form class="login-container" label-position="left"
+  <div  class="login">
+
+
+  <el-form class="login-form" label-position="left"
            label-width="0px" >
     <h3 class="login_title">系统注册</h3>
     <el-form-item  prop="username" >
@@ -22,6 +25,8 @@
 
 
   </el-form>
+
+  </div>
 </template>
 
 <script>
@@ -77,20 +82,54 @@
 </script>
 
 <style scoped>
-  .login-container {
-    border-radius: 15px;
-    background-clip: padding-box;
-    margin: 90px auto;
-    width: 350px;
-    padding: 35px 35px 15px 35px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    background-image: url("../assets/image/login-background.jpg");
+    background-size: cover;
+  }
+  .title {
+    margin: 0px auto 30px auto;
+    text-align: center;
+    color: #707070;
   }
 
-  .login_title {
-    margin: 0px auto 40px auto;
+  .login-form {
+    border-radius: 6px;
+    background: #ffffff;
+    width: 400px;
+    padding: 25px 25px 5px 25px;
+  }
+
+
+  .el-input {
+    height: 38px;
+  }
+
+
+  input {
+    height: 38px;
+  }
+
+
+
+  img {
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+  .el-login-footer {
+    height: 40px;
+    line-height: 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     text-align: center;
-    color: #4169E1;
+    color: #fff;
+    font-family: Arial;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 </style>

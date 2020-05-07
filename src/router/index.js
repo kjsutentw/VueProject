@@ -12,6 +12,7 @@ import Userindex from '../components/OrdinaryUser/Userindex'
 import RootLogin from '@/components/RootLogin'
 import OrdinaryTable from '../components/OrdinaryUser/OrdinaryDataTable'
 import OfficeFreeTable from '../components/OrdinaryUser/Office/OfficeExpensesDataTable'
+import LaboratoryTable from '../components/OrdinaryUser/LaboratoryFeeForm/Table'
 Vue.use(Router)
 
 const router = new Router({
@@ -37,6 +38,10 @@ const router = new Router({
         {
           path:'/officeFreeTable',
           component:OfficeFreeTable
+        },
+        {
+          path:'/laboratory',
+          component:LaboratoryTable
         }
         ]
     },

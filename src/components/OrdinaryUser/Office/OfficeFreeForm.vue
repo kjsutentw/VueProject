@@ -83,7 +83,7 @@
         this.ruleForm.createUser = JSON.parse(sessionStorage.getItem("userinfo")).username;
         console.log(this.ruleForm)
         this.$axios
-          .post('/officeForm/addfrom',this.ruleForm)
+          .post('/budget/officeForm/addfrom',this.ruleForm)
           .then(successResponse => {
             if (successResponse.data.code == 200) {
               this.$message({

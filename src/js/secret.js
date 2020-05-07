@@ -1,13 +1,8 @@
 import Vue from 'vue'
 import { AES, enc, mode, pad } from 'crypto-js'
-export default {//加密
-  // encrypt(word, keyStr){
-  //
-  //   var key  = CryptoJS.enc.Utf8.parse(keyStr);//Latin1 w8m31+Yy/Nw6thPsMpO5fg==
-  //   var srcs = CryptoJS.enc.Utf8.parse(word);
-  //   var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
-  //   return encrypted.toString();
-  // },
+export default {
+
+
   //解密
   decrypt(word){
 

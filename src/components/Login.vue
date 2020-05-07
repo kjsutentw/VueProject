@@ -29,38 +29,32 @@
 
 
 <script>
+
   export default {
     name: 'Login',
     data () {
       return {
         loginForm: {
           username: '',
-          password: ''
+          password: '',
+          userAuthority:'ordinary'
+
         },
         responseResult: []
       }
     },
     methods: {
       login () {
-        var submitdata=this.loginForm;
         this.$axios
-          .post('/user/login', {
-            submitdata: submitdata
-          })
+          .post('/user/login?username='+this.loginForm.username+'&password='+this.loginForm.password+'&authority='+this.loginForm.userAuthority+'')
           .then(successResponse => {
             if (successResponse.data.code ==200) {
 
               sessionStorage.setItem("token", 'true');
-
-              var userInfo=successResponse.data.data;
+              var userInfo=this.loginForm;
               sessionStorage.setItem("userinfo", JSON.stringify(userInfo));//存入的是一个字符串
-              //普通用户进入这个
-              if(userInfo.userAuthority=="ordinary"){
-                this.$router.push({path: "/ordinarytable"});
-              }else {
-                this.$router.push({path: "/index"});
-              }
-
+              window.localStorage.setItem('jwttoken',successResponse.data.data)
+              this.$router.push({path: "/ordinarytable"});
 
             }else {
               this.$message.error({
@@ -89,7 +83,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 800px;
     background-image: url("../assets/image/login-background.jpg");
     background-size: cover;
   }

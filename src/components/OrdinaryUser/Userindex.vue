@@ -38,7 +38,7 @@
                 <el-menu-item index="1-1">专业建设项目明细</el-menu-item>
                 <el-menu-item index="1-2">办公费用明细</el-menu-item>
                 <el-menu-item index="1-3">科研项目明细</el-menu-item>
-                <el-menu-item index="1-4">教改项目明细</el-menu-item>
+                <el-menu-item index="1-4">实验室费用明细</el-menu-item>
               </el-submenu>
               <el-submenu index="2">
                 <template slot="title">大数据模块</template>
@@ -84,7 +84,9 @@
           case '1-2':
             this.$router.push('/officeFreeTable');
             break;
-
+          case '1-4':
+            this.$router.push('/laboratory');
+            break;
 
         }
       }

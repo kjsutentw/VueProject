@@ -31,7 +31,8 @@
       return{
         loginForm: {
           username: '',
-          password: ''
+          password: '',
+          userAuthority:'Approver'
         }
 
 
@@ -40,36 +41,18 @@
     methods:{
       login () {
         var submitdata=this.loginForm;
+
         this.$axios
-          .post('/user/login', {
-            submitdata: submitdata
-          })
+          .post('/user/login?username='+this.loginForm.username+'&password='+this.loginForm.password+'&authority='+this.loginForm.userAuthority+'')
           .then(successResponse => {
             if (successResponse.data.code ==200) {
 
-
+             //将用户信息
+              var userInfo=this.loginForm;
               sessionStorage.setItem("token", 'true');
-
-              var userInfo=successResponse.data.data;
-              sessionStorage.setItem("userinfo", JSON.stringify(userInfo));//存入的是一个字符串
-              //普通用户进入这个
-              if(userInfo.userAuthority=="ordinary"){
-                this.$message({
-                  message: '您登陆的是普通用户账号!',
-                  type: 'error'
-                });
-                this.$router.push({path: "/"});
-              }else {
-                if(userInfo.userAuthority=="Approver"){
-                  this.$router.push({path: "/index"});
-                }else if(userInfo.userAuthority=="root") {
-
-                }
-
-
-
-              }
-
+              sessionStorage.setItem("userinfo", JSON.stringify(userInfo));
+              window.localStorage["JwtToken"] = successResponse.data.data;
+              this.$router.push({path: "/index"});
 
             }else {
               this.$message.error({
@@ -93,7 +76,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 800px;
     background-image: url("../assets/image/login-background.jpg");
     background-size: cover;
   }

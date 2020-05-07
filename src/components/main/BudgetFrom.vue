@@ -117,7 +117,7 @@
           }
         })
         .catch(failResponse => {
-          console.log(data.msg);
+          console.log(failResponse);
         })
 
 

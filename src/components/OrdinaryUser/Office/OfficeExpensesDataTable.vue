@@ -139,7 +139,7 @@
       query(currentPage,pagesize){
 
         this.$axios
-          .get('/officeForm/select',{
+          .get('/budget/officeForm/select',{
             params:{
               username:this.username,
               currentPage: currentPage,
@@ -171,7 +171,7 @@
       recall(punid,row){
 
         this.$axios
-          .post('/officeForm/update/status?'+'punid='+punid+'&'+'status=00011').then(datasuccessRsp => {
+          .post('/budget/officeForm/update/status?'+'punid='+punid+'&'+'status=00011').then(datasuccessRsp => {
           if (datasuccessRsp.data.code ==200) {
             row.status='00011';
             this.query(this.currentPage,this.pagesize);

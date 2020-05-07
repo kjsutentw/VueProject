@@ -98,7 +98,6 @@
         console.log(row)
         this.updateFromVisable = true
         this.ruleForm = row
-
       },
       resetForm(formName) {
        var id=this.ruleForm.id='';
